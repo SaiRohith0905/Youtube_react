@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./Components/Header";
+import Body from "./Components/Body";
+import menuBarContext from "./Utils/menuBarContext";
+import { useState } from "react";
+import store from "./Utils/Store";
+import { Provider } from "react-redux";
+import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
+import "primereact/resources/primereact.min.css";
 
 function App() {
+  const [navbarconfig, setNavBarConfig] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PrimeReactProvider>
+      <Provider store={store}>
+        <menuBarContext.Provider value={{ navbarconfig, setNavBarConfig }}>
+          <div className="">
+            <Header />
+            <Body />
+          </div>
+        </menuBarContext.Provider>
+      </Provider>
+    </PrimeReactProvider>
   );
 }
 
