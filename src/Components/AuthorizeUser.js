@@ -3,7 +3,8 @@ import React from "react";
 const AuthorizeUser = (props) => {
   const clientId =
     "650726984312-0g9vhkf1vqa2i4onn2jpgc1v1l5q9prm.apps.googleusercontent.com";
-  const redirectURL = "http://localhost:3000";
+  // const redirectURL = "http://localhost:3000";enable this on local
+  const redirectURL = "https://test-d9d23.web.app/"; //enable this while deploying
   const youtubeScopes = "https://www.googleapis.com/auth/youtube"; //   const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 
   //   const params = {
