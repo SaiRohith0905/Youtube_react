@@ -4,6 +4,7 @@ import watchHistorySlice from "./watchHistorySlice";
 import isAuthorizedSlice from "./isAuthorizedSlice";
 import tokenSlice from "./tokenSlice";
 import playListItemsSlice from "./PlayListItemsSlice";
+import WatchLaterSlice from "./WatchLaterSlice";
 const store = configureStore({
   reducer: {
     searchCache: searchCacheSlice,
@@ -11,6 +12,7 @@ const store = configureStore({
     isAuthorized: isAuthorizedSlice,
     token: tokenSlice,
     playlistitems: playListItemsSlice,
+    watchlater: WatchLaterSlice,
   },
 });
 

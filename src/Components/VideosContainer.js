@@ -7,11 +7,13 @@ import { addHistory } from "../Utils/watchHistorySlice";
 import VideoKebabMenu from "./VideoKebabMenu";
 import { setLogin } from "../Utils/isAuthorizedSlice";
 import { setToken } from "../Utils/tokenSlice";
-const VideosContainer = () => {
+
+const VideosContainer = (VCstyle) => {
+  const authtoken = localStorage.getItem("authtoken");
   const [videos, setVideos] = useState([]);
   const [pageToken, setPageToken] = useState("");
   const dispatch = useDispatch();
-  let lastScrollPosition = 0;
+
   async function fetchVideos() {
     let url = YOUTUBE_VIDEOS_URL;
     if (pageToken) {
@@ -19,7 +21,13 @@ const VideosContainer = () => {
       url = url + "&pageToken=" + pageToken;
     }
     // console.log(url);
-    const data = await fetch(url);
+    const data = await fetch(url, {
+      method: "GET",
+      // headers: {
+      //   Authorization: "Bearer " + authtoken,
+      //   Accept: "application/json",
+      // },
+    });
     const jsondata = await data.json();
 
     setPageToken(jsondata?.nextPageToken);
@@ -68,20 +76,17 @@ const VideosContainer = () => {
     };
   }, [pageToken]);
   return (
-    <div className="flex flex-wrap ">
+    <div className="flex flex-wrap" VCstyle={VCstyle}>
       {videos.map((eachvideo, index) => {
         return (
           <div className="relative">
             <Link
-              to={"/watch?v=" + eachvideo?.id?.videoId}
+              to={"/watch?v=" + eachvideo?.id}
               onClick={() => {
                 dispatch(addHistory(eachvideo));
               }}
             >
-              <VideoCard
-                key={eachvideo?.id?.videoId}
-                videodata={videos[index]}
-              />
+              <VideoCard key={eachvideo?.id} videodata={videos[index]} />
             </Link>
             <div className="absolute right-[18px] bottom-[68px] ">
               <VideoKebabMenu vedioDetails={eachvideo} />

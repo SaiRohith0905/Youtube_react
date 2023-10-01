@@ -6,11 +6,11 @@ const watchHistorySlice = createSlice({
   initialState: { storeHistory: [] },
   reducers: {
     addHistory: (state, action) => {
-      let id = action.payload.id.videoId;
+      let id = action.payload.id;
 
       let duplicateHistory = [];
       duplicateHistory = current(state.storeHistory).filter((item) => {
-        if (item.id.videoId === id) return item;
+        if (item.id === id) return item;
       });
       console.log(duplicateHistory);
       if (duplicateHistory.length == 0) {

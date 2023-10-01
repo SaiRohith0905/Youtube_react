@@ -11,6 +11,9 @@ import HistoryPage from "./Components/HistoryPage";
 import AuthorizeUser from "./Components/AuthorizeUser";
 import PlayListCard from "./Components/PlayListCard";
 import SubscriptionsPage from "./Components/SubscriptionsPage";
+import WatchLaterPage from "./Components/WatchLaterPage";
+import ShortsPage from "./Components/ShortsPage";
+import ShortsLoop from "./Components/ShortsLoop";
 
 const AppRouter = createBrowserRouter([
   {
@@ -44,6 +47,18 @@ const AppRouter = createBrowserRouter([
       {
         path: "/subscriptions",
         element: <SubscriptionsPage />,
+      },
+      {
+        path: "/watchlater",
+        element: <WatchLaterPage />,
+      },
+      {
+        path: "/shorts/:id",
+        element: <ShortsPage />,
+      },
+      {
+        path: "/shorts",
+        element: <ShortsLoop />,
       },
     ],
   },

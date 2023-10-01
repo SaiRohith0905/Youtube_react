@@ -85,6 +85,7 @@ const SubscribeButton = (props) => {
     <>
       {!subscribed && (
         <div
+          className="bg-black p-2 ml-2 mr-2 mt-1 mb-1 text-white rounded-l-full cursor-pointer rounded-r-full text-center"
           onClick={() => {
             subscribeChannel();
           }}
@@ -94,6 +95,7 @@ const SubscribeButton = (props) => {
       )}
       {subscribed && (
         <div
+          className="bg-gray-300 p-2 ml-2 mr-2 mt-1 mb-1 text-black rounded-l-full cursor-pointer rounded-r-full text-center"
           onClick={() => {
             setShowUnSubscribe(!showUnSubscribe);
           }}

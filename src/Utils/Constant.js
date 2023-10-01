@@ -1,8 +1,8 @@
-export const YOUTUBE_KEY = "AIzaSyDJyClO7z-DRa7cFG5kFD1Vfm_LeRvHOMM";
+export const YOUTUBE_KEY = "AIzaSyCygUbkXLc4IihikIhqpmU_BNa3xIaBmjU";
+
 export const YOUTUBE_VIDEOS_URL =
-  "https://www.googleapis.com/youtube/v3/search?key=" +
-  YOUTUBE_KEY +
-  "&part=snippet&regionCode=IN&maxResults=12";
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=24&regionCode=IN&key=" +
+  YOUTUBE_KEY;
 
 export const SEARCH_SUGGESTIONS_URL =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";

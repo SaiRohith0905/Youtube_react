@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
+import { Toast } from "primereact/toast";
+import { useRef } from "react";
 import {
   ADD_VEDIO_TO_PLAYLIST_URL,
   CREATE_NEWPLAYLIST_URL,
@@ -11,10 +13,12 @@ import {
 } from "../Utils/Constant";
 import { Dropdown } from "primereact/dropdown";
 import { addPlayListItems } from "../Utils/PlayListItemsSlice";
+import { addToWatchLater } from "../Utils/WatchLaterSlice";
 
 const VideoKebabMenu = (props) => {
+  const toast = useRef(null);
   const dispatch = useDispatch();
-  const vedioIdAdd = props?.vedioDetails?.id?.videoId;
+  const vedioIdAdd = props?.vedioDetails?.id;
   const authToken = localStorage.getItem("authtoken");
   // console.log(vedioIdAdd);
   const [showMenuOptions, setShowMenuOptions] = useState(false);
@@ -78,6 +82,12 @@ const VideoKebabMenu = (props) => {
     const jsonoutput = await response?.json();
     console.log(jsonoutput);
     videoPlayListItemID = jsonoutput?.id;
+    const Message = "added to " + playlistToADD?.snippet?.localized?.title;
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: Message,
+    });
   }
   async function removeItemsFromPlayList() {
     const url =
@@ -88,6 +98,12 @@ const VideoKebabMenu = (props) => {
         Authorization: "Bearer " + authToken,
         Accept: "application / json",
       },
+    });
+    const Message = "Remove from PlayList";
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: Message,
     });
   }
 
@@ -125,8 +141,10 @@ const VideoKebabMenu = (props) => {
       addItemstoPlayList(playListResponse, true);
     }
   }
+
   return (
     <>
+      <Toast ref={toast} />
       <div
         className="w-2 bottom-[92px] left-[382px]"
         onClick={() => {
@@ -140,7 +158,18 @@ const VideoKebabMenu = (props) => {
       {showMenuOptions && (
         <div className="absolute right-[10px] bottom-[-30px] border border-solid border-blue-50 shadow-md bg-white rounded-md w-[200px] z-[120]">
           <ul className="">
-            <li className="hover:bg-gray-200 cursor-pointer p-3">
+            <li
+              className="hover:bg-gray-200 cursor-pointer p-3"
+              onClick={() => {
+                dispatch(addToWatchLater(props?.vedioDetails));
+                toast.current.show({
+                  severity: "success",
+                  summary: "Success",
+                  detail: "Added to watch later",
+                });
+                setShowMenuOptions(false);
+              }}
+            >
               Save to Watch Later ⏱
             </li>
             <li

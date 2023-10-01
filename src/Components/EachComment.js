@@ -6,29 +6,26 @@ const EachComment = (props) => {
   const { snippet } = props?.commentProps?.snippet?.topLevelComment;
   return (
     <div className="flex border-2 border-b-gray-300 bg-slate-200 ">
-      <div className="w-[3%] m-[5px] ">
+      <div className="w-[4%] m-[5px] ">
         <img
           className="rounded-full"
           src={snippet?.authorProfileImageUrl}
           alt="icon"
         />
       </div>
-      <div className="w-[97%] m-[5px]">
-        <div className="text-black text-xl inline-block p-2">
+      <div className="w-[96%] m-[5px] text-black">
+        <div className=" text font-medium inline-block m-1">
           @{snippet?.authorDisplayName}
         </div>
-        <span>{snippet?.updatedAt}</span>
-        <div
-          className="break-all
-        "
-        >
-          {snippet?.textDisplay}
-        </div>
+        {/* <span className="text-sm ml-[20px]">{snippet?.updatedAt}</span> */}
+        <div className="break-all text-sm">{snippet?.textDisplay}</div>
 
-        <div>👍 ({snippet?.likeCount})</div>
+        <div className="text-xs">
+          <i class="fa-solid fa-thumbs-up fa-lg"></i> ({snippet?.likeCount})
+        </div>
         {replies && replies?.comments?.length > 0 && (
           <button
-            className="border border-solid pt-1 pb-1 pl-2 pr-2 border-slate-900 rounded-md p"
+            className="border border-solid pt-[2px] pb-[2px] pl-[2px] pr-[2px] border-slate-900 rounded-md"
             onClick={() => {
               setShowReplies(!showReplies);
             }}
@@ -61,9 +58,11 @@ const EachReply = (props) => {
             @{snippet?.authorDisplayName}
           </div>
           <span>{snippet?.updatedAt}</span>
-          <div className="break-all">{snippet?.textDisplay}</div>
+          <div className="break-all text-xs">{snippet?.textDisplay}</div>
 
-          <div>👍 ({snippet?.likeCount})</div>
+          <div>
+            <i class="fa-solid fa-thumbs-up fa-lg"></i> ({snippet?.likeCount})
+          </div>
         </div>
       </div>
     );

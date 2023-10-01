@@ -5,7 +5,7 @@ const ChannelCard = (props) => {
   console.log(props);
   const { contentDetails, id, snippet } = props?.channeldetails;
   return (
-    <div className="m-3 p-2 items-center flex">
+    <div className="m-3 p-2 items-center flex shadow-md rounded-md">
       <div className="w-[30%]">
         <img
           src={snippet?.thumbnails?.medium?.url}
@@ -13,14 +13,21 @@ const ChannelCard = (props) => {
           className="rounded-full inline-block"
         />
       </div>
-      <div className="w-[60%]">
-        <div className="w-[300px]">{snippet?.title}</div>
-
-        <p>{contentDetails?.totalItemCount} Videos</p>
-        <div className="flex">
-          <p className="w-[800px] h-auto">{snippet?.description}</p>
+      <div className="w-[70%] flex ">
+        <div className="w-[70%]">
+          <div className="w-auto text-3xl m-1">{snippet?.title}</div>
+          <p className="text-xl m-1">{contentDetails?.totalItemCount} Videos</p>
+          <div className="flex">
+            <p className="w-[800px] h-auto text-xs m-2">
+              {snippet?.description}
+            </p>
+          </div>
+        </div>
+        <div className="w-[30%] ">
           {snippet?.resourceId?.channelId && (
-            <SubscribeButton details={snippet?.resourceId?.channelId} />
+            <div className="w-[50%]">
+              <SubscribeButton details={snippet?.resourceId?.channelId} />
+            </div>
           )}
         </div>
       </div>

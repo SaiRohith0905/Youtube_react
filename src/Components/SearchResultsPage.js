@@ -11,7 +11,9 @@ const SearchResultsPage = () => {
   const [data] = useSearchParams();
 
   const [nextPageToken, setNextPageToken] = useState("");
-  const searchword = data.get("searchquery");
+  let searchword;
+
+  searchword = data.get("searchquery");
   console.log(searchword);
 
   const dispatch = useDispatch();
@@ -32,8 +34,8 @@ const SearchResultsPage = () => {
   }
   const handleScroll = () => {
     if (
-      document.documentElement.scrollTop + window.innerHeight ==
-      document.documentElement.offsetHeight
+      document.documentElement.scrollTop + window.innerHeight >
+      document.documentElement.offsetHeight - 10
     ) {
       searchResults();
     }
@@ -48,6 +50,9 @@ const SearchResultsPage = () => {
 
   useEffect(() => {
     searchResults();
+    return () => {
+      setResults([]);
+    };
   }, [searchword]);
   if (results.length > 0) {
     return (

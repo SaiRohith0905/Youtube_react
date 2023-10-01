@@ -1,11 +1,10 @@
 import React from "react";
 
-const AuthorizeUser = () => {
+const AuthorizeUser = (props) => {
   const clientId =
-    "190912028867-sgu0icqt9981uhrjg04viudd8vjq6sml.apps.googleusercontent.com";
+    "650726984312-0g9vhkf1vqa2i4onn2jpgc1v1l5q9prm.apps.googleusercontent.com";
   const redirectURL = "http://localhost:3000";
-  const youtubeScopes = "https://www.googleapis.com/auth/youtube";
-  //   const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+  const youtubeScopes = "https://www.googleapis.com/auth/youtube"; //   const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 
   //   const params = {
   //     client_id: clientId,
@@ -41,9 +40,14 @@ const AuthorizeUser = () => {
     <>
       <div>
         <button
-          className="border border-solid border-gray-200 pl-3 pr-3 pt-1 pb-1 cursor-pointer rounded-l-full rounded-r-full hover:bg-blue-200 text-blue-500"
+          className={
+            props?.issubpage
+              ? "text-4xl border border-solid border-gray-200 pl-3 pr-3 pt-1 pb-1 cursor-pointer rounded-l-full rounded-r-full hover:bg-blue-200 text-blue-500"
+              : "border border-solid border-gray-200 pl-3 pr-3 pt-1 pb-1 cursor-pointer rounded-l-full rounded-r-full hover:bg-blue-200 text-blue-500"
+          }
           onClick={handleSubmit}
         >
+          <i class="fa-solid fa-circle-user pr-2"></i>
           Sign In
         </button>
       </div>

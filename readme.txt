@@ -96,3 +96,32 @@ https://accounts.google.com/o/oauth2/v2/auth?
  state=state_parameter_passthrough_value&
  redirect_uri=http://localhost:3000&
  client_id=190912028867-sgu0icqt9981uhrjg04viudd8vjq6sml.apps.googleusercontent.com
+
+
+
+
+ pending list 
+
+ Shimmier  --- 30mins
+    search - click issue
+ playsit delete and invidiual delete --- 30mins
+ home page buttons scroll ----45 mins
+ shorts ---- 30 mins
+
+ 4 ki 
+ watch page sidenavbar float -- completed.
+ success notifications in playlist ----completed
+ sigin in in header and styling --------------- completed
+ sidenavbar hovering issue ----------completed
+ watch later -----------completed
+
+[CL1hUw9axps,
+BQLybNh4tR8,
+5lvXwWJU17c,
+UyXHO2J5aig,
+zncNtWhBy_M,
+DCq6JmutBos,
+j2hjdqkHX4E,
+ClivakhDibg,
+KXGwNn0GZxQ,
+]

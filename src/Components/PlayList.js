@@ -30,9 +30,13 @@ const PlayList = () => {
         {playListItems.map((eachPlayListItem) => {
           return (
             <Link to={"/playlist?list=" + eachPlayListItem?.id}>
-              <li className=" hover:bg-gray-200 hover:rounded-md mt-1 mb-1 pt-1 pb-1">
-                {eachPlayListItem?.snippet?.title}
-              </li>
+              <div className=" hover:bg-gray-200 hover:rounded-md ">
+                <i class="fa-solid fa-headphones-simple pr-[4px] ml-2"></i>
+
+                <li className=" mt-1 mb-1 pt-1 pb-1 inline-block">
+                  {eachPlayListItem?.snippet?.title}
+                </li>
+              </div>
             </Link>
           );
         })}

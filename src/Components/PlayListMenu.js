@@ -10,13 +10,17 @@ const PlayListMenu = () => {
   if (isLogged || reactLogin) {
     return (
       <div>
-        <PlayList />
+        <span>
+          <PlayList />
+        </span>
       </div>
     );
   } else {
     return (
-      <div>
-        <div>Sign in to view your Playlists and Subscriptions</div>
+      <div className=" border-b-2 border-b-gray-200 pb-[12px]">
+        <div className="text-sm pb-[12px]">
+          Sign in to view your Playlists and Subscriptions
+        </div>
         <AuthorizeUser />
       </div>
     );

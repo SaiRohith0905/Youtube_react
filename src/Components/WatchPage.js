@@ -7,15 +7,20 @@ import SubscribeButton from "./SubscribeButton";
 import {
   IS_SUBSCRIBED_URL,
   SINGLE_VIDEO_DETAILS,
-  SUBSCRIBE_TO_CHANNEL_URL,
-  UNSUBSCRIBE_TO_CHANNEL,
-  UNSUBSCRIBE_TO_CHANNEL_URL,
   VIDEO_DETAILS_URL,
   YOUTUBE_KEY,
 } from "../Utils/Constant";
 import Linkify from "react-linkify";
-import ReactMarkdown from "react-markdown";
+import VideosContainer from "./VideosContainer";
+import floatMenuBarContext from "../Utils/floatMenuBarContext";
+import { formatViews } from "../Utils/Helper";
+import { Toast } from "primereact/toast";
 const WatchPage = () => {
+  const VCStyle = {
+    backgroundColor: "red",
+    flexWrap: "nowrap",
+    flexDirection: "column",
+  };
   const [videoParams] = useSearchParams();
   const [videoDetails, setVideoDetails] = useState({
     snippet: {
@@ -51,6 +56,8 @@ const WatchPage = () => {
   const navbarinfo = useContext(menuBarContext);
   const { setNavBarConfig } = navbarinfo;
   const [showDescription, setShowDescription] = useState(true);
+  const floatnavbarinfo = useContext(floatMenuBarContext);
+  const { floatNavBarConfig, setFloatNavBarConfig } = floatnavbarinfo;
 
   async function getVideoDetails() {
     const response = await fetch(SINGLE_VIDEO_DETAILS + videoId);
@@ -90,117 +97,92 @@ const WatchPage = () => {
     setSubscribed(jsondata4?.items?.length > 0 ? true : false);
   }
 
-  async function subscribeChannel() {
-    const subscribePayLoad = {
-      snippet: {
-        resourceId: {
-          kind: "youtube#channel",
-          channelId: channelId,
-        },
-      },
-    };
-    const url = SUBSCRIBE_TO_CHANNEL_URL + YOUTUBE_KEY;
-    const response6 = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + authtoken,
-        Accept: "application / json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(subscribePayLoad),
-    });
-    const jsondata6 = await response6.json();
-    console.log(jsondata6);
-    setSubscribed(true);
-  }
-  async function unSubscribeChannel() {
-    const url =
-      UNSUBSCRIBE_TO_CHANNEL_URL +
-      subscriptionId.current +
-      "&key=" +
-      YOUTUBE_KEY;
-    const response5 = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        Authorization: "Bearer " + authtoken,
-        Accept: "application / json",
-      },
-    });
-    setSubscribed(false);
-  }
   // setNavBarConfig(false);
   useEffect(() => {
     setNavBarConfig(false);
+  }, []);
+  useEffect(() => {
+    setFloatNavBarConfig(true);
+    return () => {
+      document
+        .getElementsByTagName("body")[0]
+        .classList.remove("hideBodyScroll");
+      setFloatNavBarConfig(false);
+    };
   }, []);
 
   useEffect(() => {
     getVideoDetails();
   }, []);
-
   return (
-    <div className="">
+    <div className="flex">
       <div className="">
-        <iframe
-          width="900"
-          height="500"
-          src={url + videoId + "?autoplay=1"}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-      </div>
-      <div className="w-[900px] ">
-        <div>
-          <div>{title}</div>
-          <div className="flex">
-            <div className="w-10 ">
-              <img
-                className="rounded-full"
-                src={thumbnails?.default?.url}
-                alt="Channel-logo"
-              />
-            </div>
-            <div className="">
-              <div>{channelTitle}</div>
-              <div>
-                {" "}
-                {channelDetails?.statistics?.subscriberCount} Subscribers
+        <div className="w-[70%] rounded-md">
+          <iframe
+            className="rounded-lg"
+            width="900"
+            height="500"
+            src={url + videoId + "?autoplay=1"}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="w-[98%] rounded-md m-2 bg-white">
+          <div>
+            <div className="text-xl font-bold  m-1">{title}</div>
+            <div className="flex">
+              <div className="w-10 m-2">
+                <img
+                  className="rounded-full"
+                  src={thumbnails?.default?.url}
+                  alt="Channel-logo"
+                />
+              </div>
+              <div className=" m-2 ">
+                <div className="text-sm font-semibold">{channelTitle}</div>
+                <div className="text-xs font-normal">
+                  {formatViews(channelDetails?.statistics?.subscriberCount)}{" "}
+                  Subscribers
+                </div>
+              </div>
+              <div className="ml-[10px]">
+                {channelId && <SubscribeButton details={channelId} />}
+              </div>
+              <div className="pt-[8px] pl-[20px]">
+                <i class="fa-solid fa-thumbs-up fa-lg"></i> :{" "}
+                {formatViews(likeCount)}
               </div>
             </div>
-            {channelId && <SubscribeButton details={channelId} />}
-            {/* <div>{commentCount}</div> */}
-            {/* <button
-              className="bg-black text-white rounded-l-full rounded-r-full pl-[5px] pr-[5px] pt-[3px] pb-[3px]"
-              onClick={() => {
-                subscribed ? unSubscribeChannel() : subscribeChannel();
-              }}
-            >
-              Subscribe
-            </button> */}
-            <div>👍:{likeCount}</div>
+          </div>
+          <p
+            className={
+              (showDescription
+                ? "h-[125px] overflow-hidden text-ellipsis"
+                : "") + "links bg-gray-100"
+            }
+          >
+            <Linkify>{description}</Linkify>
+          </p>
+          <div
+            className="cursor-pointer  bg-gray-100"
+            onClick={() => {
+              showContent();
+            }}
+          >
+            {showDescription ? "Show more" : "Show less"}
           </div>
         </div>
-        <p
-          className={
-            (showDescription ? "h-[125px] overflow-hidden text-ellipsis" : "") +
-            "links bg-stone-100"
-          }
-        >
-          <Linkify>{description}</Linkify>
-        </p>
-        <div
-          className="cursor-pointer  bg-stone-100"
-          onClick={() => {
-            showContent();
-          }}
-        >
-          {showDescription ? "Show more" : "Show less"}
+        <div className="m-2 text-base font-medium">
+          {formatViews(commentCount)} Comments
+        </div>
+        <div className="w-[98%]">
+          <Comments videoinfo={videoId} />
         </div>
       </div>
-      <div>{commentCount} Comments</div>
-      <div className="w-[900px]">
-        <Comments videoinfo={videoId} />
+      <div>
+        <VideosContainer VCstyle={VCStyle} />
       </div>
     </div>
   );

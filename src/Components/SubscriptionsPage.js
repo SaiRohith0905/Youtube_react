@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ChannelCard from "./ChannelCard";
+import AuthorizeUser from "./AuthorizeUser";
 import { GET_MY_SUBSCRIPTIONS_URL, YOUTUBE_KEY } from "../Utils/Constant";
+import Toasting from "./CustomHooks/Toasting";
 
 const SubscriptionsPage = () => {
   const authtoken = localStorage.getItem("authtoken");
+  const isLoggedIn = localStorage.getItem("isLoggedin") || false;
   const [mySubscriptions, setMySubscriptions] = useState([]);
   async function getMySubscriptions() {
     const url = GET_MY_SUBSCRIPTIONS_URL + YOUTUBE_KEY;
@@ -21,10 +24,20 @@ const SubscriptionsPage = () => {
   useEffect(() => {
     getMySubscriptions();
   }, []);
-  if (mySubscriptions?.length > 0) {
+  if (isLoggedIn) {
     return mySubscriptions.map((eachitem) => {
       return <ChannelCard channeldetails={eachitem} />;
     });
+  } else {
+    return (
+      <div className="mt-[150px] text-center pb-[12px]">
+        <div className="text-5xl m-16">
+          Hello User <i class="fa-regular fa-face-laugh-beam fa-2xl"></i> !!!
+        </div>
+        <div className="text-5xl m-16">Sign in to view your Subscriptions</div>
+        <AuthorizeUser issubpage={true} />
+      </div>
+    );
   }
 };
 

@@ -1,23 +1,24 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ResultVideoCard from "./ResultVideoCard";
+import { Link } from "react-router-dom";
 import { clearHistory } from "../Utils/watchHistorySlice";
 import { Toast } from "primereact/toast";
+import { clearWatchLater } from "../Utils/WatchLaterSlice";
 
-import { Link } from "react-router-dom";
-const HistoryPage = () => {
+const WatchLaterPage = () => {
   const toast = useRef(null);
-  const historyDetails = useSelector((store) => {
-    return store.history.storeHistory;
-  });
   const dispatch = useDispatch();
-  console.log(historyDetails);
-  if (historyDetails.length > 0) {
+  const watchLaterDetails = useSelector((store) => {
+    return store?.watchlater?.watchlater;
+  });
+  // const watchLaterDetails = [];
+  if (watchLaterDetails.length > 0) {
     return (
       <div>
         <Toast ref={toast} />
         <div>
-          <span className="text-xl font-bold">Watch History</span>
+          <span className="text-xl font-bold">Watch Later</span>
           <button
             className="border border-black inline-block cursor-pointer p-2 rounded-lg ml-3"
             onClick={() => {
@@ -28,17 +29,17 @@ const HistoryPage = () => {
                   detail: "Cleared Watch History",
                 });
                 setTimeout(() => {
-                  dispatch(clearHistory());
+                  dispatch(clearWatchLater());
                 }, 500);
               }
             }}
           >
-            Clear all Watch History !
+            Clear Watch Later!
           </button>
         </div>
 
         <div>
-          {historyDetails.map((eachVideo) => {
+          {watchLaterDetails.map((eachVideo) => {
             return (
               <Link to={"/watch?v=" + eachVideo?.id?.videoId}>
                 <ResultVideoCard properties={eachVideo} history={true} />
@@ -49,10 +50,8 @@ const HistoryPage = () => {
       </div>
     );
   } else {
-    <Toast ref={toast} />;
-
-    return <div>No Watch History in your Current Session !!</div>;
+    return <div>No Watch later Videos in your Current Session!!</div>;
   }
 };
 
-export default HistoryPage;
+export default WatchLaterPage;
