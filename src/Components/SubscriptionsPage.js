@@ -32,7 +32,8 @@ const SubscriptionsPage = () => {
     return (
       <div className="mt-[150px] text-center pb-[12px]">
         <div className="text-5xl m-16">
-          Hello User <i class="fa-regular fa-face-laugh-beam fa-2xl"></i> !!!
+          Hello User <i className="fa-regular fa-face-laugh-beam fa-2xl"></i>{" "}
+          !!!
         </div>
         <div className="text-5xl m-16">Sign in to view your Subscriptions</div>
         <AuthorizeUser issubpage={true} />

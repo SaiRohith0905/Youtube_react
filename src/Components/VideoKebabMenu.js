@@ -151,9 +151,10 @@ const VideoKebabMenu = (props) => {
           setShowMenuOptions(!showMenuOptions);
         }}
       >
+        <i className="fa-solid fa-ellipsis-vertical"></i>
+        {/* <div className=" w-1 h-1 m-[2px] rounded-full bg-black"></div>
         <div className=" w-1 h-1 m-[2px] rounded-full bg-black"></div>
-        <div className=" w-1 h-1 m-[2px] rounded-full bg-black"></div>
-        <div className=" w-1 h-1 m-[2px] rounded-full bg-black"></div>
+        <div className=" w-1 h-1 m-[2px] rounded-full bg-black"></div> */}
       </div>
       {showMenuOptions && (
         <div className="absolute right-[10px] bottom-[-30px] border border-solid border-blue-50 shadow-md bg-white rounded-md w-[200px] z-[120]">

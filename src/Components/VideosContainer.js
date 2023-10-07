@@ -7,14 +7,18 @@ import { addHistory } from "../Utils/watchHistorySlice";
 import VideoKebabMenu from "./VideoKebabMenu";
 import { setLogin } from "../Utils/isAuthorizedSlice";
 import { setToken } from "../Utils/tokenSlice";
+import VideoCardShimmer from "./VideoCardShimmer";
 
-const VideosContainer = (VCstyle) => {
+const VideosContainer = (vcstyle) => {
+  const shimmerArray = Array(12).fill("");
   const authtoken = localStorage.getItem("authtoken");
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [pageToken, setPageToken] = useState("");
   const dispatch = useDispatch();
 
   async function fetchVideos() {
+    setLoading(true);
     let url = YOUTUBE_VIDEOS_URL;
     if (pageToken) {
       console.log(pageToken);
@@ -32,6 +36,7 @@ const VideosContainer = (VCstyle) => {
 
     setPageToken(jsondata?.nextPageToken);
     setVideos(videos.concat(jsondata?.items));
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -75,27 +80,50 @@ const VideosContainer = (VCstyle) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [pageToken]);
-  return (
-    <div className="flex flex-wrap" VCstyle={VCstyle}>
-      {videos.map((eachvideo, index) => {
-        return (
-          <div className="relative">
-            <Link
-              to={"/watch?v=" + eachvideo?.id}
-              onClick={() => {
-                dispatch(addHistory(eachvideo));
-              }}
-            >
-              <VideoCard key={eachvideo?.id} videodata={videos[index]} />
-            </Link>
-            <div className="absolute right-[18px] bottom-[68px] ">
-              <VideoKebabMenu vedioDetails={eachvideo} />
-            </div>
+  if (videos.length > 0) {
+    return (
+      <>
+        <div className="flex flex-wrap" vcstyle={vcstyle}>
+          {videos.map((eachvideo, index) => {
+            return (
+              <div className="relative">
+                <Link
+                  to={"/watch?v=" + eachvideo?.id}
+                  onClick={() => {
+                    dispatch(addHistory(eachvideo));
+                  }}
+                >
+                  <VideoCard key={eachvideo?.id} videodata={videos[index]} />
+                </Link>
+                <div className="absolute right-[18px] bottom-[68px] ">
+                  <VideoKebabMenu
+                    key={eachvideo?.id + 1}
+                    vedioDetails={eachvideo}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {loading && (
+          <div className="flex flex-wrap ">
+            {shimmerArray.map((eachItem, index) => {
+              return <VideoCardShimmer key={index} />;
+            })}
           </div>
-        );
-      })}
-    </div>
-  );
+        )}
+      </>
+    );
+  } else {
+    // return <VideoCardShimmer />;
+    return (
+      <div className="flex flex-wrap ">
+        {shimmerArray.map((eachItem, index) => {
+          return <VideoCardShimmer key={index} />;
+        })}
+      </div>
+    );
+  }
 };
 
 export default VideosContainer;

@@ -16,7 +16,7 @@ import floatMenuBarContext from "../Utils/floatMenuBarContext";
 import { formatViews } from "../Utils/Helper";
 import { Toast } from "primereact/toast";
 const WatchPage = () => {
-  const VCStyle = {
+  const vcStyle = {
     backgroundColor: "red",
     flexWrap: "nowrap",
     flexDirection: "column",
@@ -151,7 +151,7 @@ const WatchPage = () => {
                 {channelId && <SubscribeButton details={channelId} />}
               </div>
               <div className="pt-[8px] pl-[20px]">
-                <i class="fa-solid fa-thumbs-up fa-lg"></i> :{" "}
+                <i className="fa-solid fa-thumbs-up fa-lg"></i> :{" "}
                 {formatViews(likeCount)}
               </div>
             </div>
@@ -182,7 +182,7 @@ const WatchPage = () => {
         </div>
       </div>
       <div>
-        <VideosContainer VCstyle={VCStyle} />
+        <VideosContainer vcstyle={vcStyle} />
       </div>
     </div>
   );

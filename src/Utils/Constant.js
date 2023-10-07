@@ -1,11 +1,11 @@
-export const YOUTUBE_KEY = "AIzaSyCygUbkXLc4IihikIhqpmU_BNa3xIaBmjU";
+export const YOUTUBE_KEY = "AIzaSyCatbOk8xPIpXFCbTionJF2kyzgZ7bC4lg";
 
 export const YOUTUBE_VIDEOS_URL =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=24&regionCode=IN&key=" +
   YOUTUBE_KEY;
 
 export const SEARCH_SUGGESTIONS_URL =
-  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
 export const SEARCH_RESULTS_URL =
   "https://www.googleapis.com/youtube/v3/search?key=" + YOUTUBE_KEY + "&q=";

@@ -36,16 +36,16 @@ const SideNavBar = () => {
         <ul className="border-b-2 border-b-gray-200 ">
           <Link to="/">
             <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-              <i class="fa-solid fa-house"></i> <span> Home</span>
+              <i className="fa-solid fa-house"></i> <span> Home</span>
             </li>
           </Link>
           <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-            <i class="fa-solid fa-film"></i>
+            <i className="fa-solid fa-film"></i>
             <span> Shorts</span>
           </li>
           <Link to="/subscriptions">
             <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-              <i class="fa-regular fa-rectangle-list"></i>
+              <i className="fa-regular fa-rectangle-list"></i>
               <span> Subscriptions</span>
             </li>
           </Link>
@@ -56,18 +56,18 @@ const SideNavBar = () => {
           </li>
 
           <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-            <i class="fa-regular fa-circle-play"></i>
+            <i className="fa-regular fa-circle-play"></i>
             <span> Library</span>
           </li>
           <Link to="/history">
             <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-              <i class="fa-solid fa-clock-rotate-left"></i>
+              <i className="fa-solid fa-clock-rotate-left"></i>
               <span> History</span>
             </li>
           </Link>
           <Link to="/watchlater">
             <li className="pt-2 pb-2 pl-2 font-medium text-lg hover:bg-gray-200 hover:rounded-md">
-              <i class="fa-solid fa-clock"></i>
+              <i className="fa-solid fa-clock"></i>
               <span> Watch Later</span>
             </li>
           </Link>
@@ -80,7 +80,7 @@ const SideNavBar = () => {
                   to="https://www.linkedin.com/in/sairohith-tanguturi-701b2625b/"
                   target="_blank"
                 >
-                  <i class="fa-brands fa-linkedin fa-xl cursor-pointer"></i>
+                  <i className="fa-brands fa-linkedin fa-xl cursor-pointer"></i>
                 </Link>
               </span>
             </div>

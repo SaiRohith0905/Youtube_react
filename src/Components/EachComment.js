@@ -21,7 +21,7 @@ const EachComment = (props) => {
         <div className="break-all text-sm">{snippet?.textDisplay}</div>
 
         <div className="text-xs">
-          <i class="fa-solid fa-thumbs-up fa-lg"></i> ({snippet?.likeCount})
+          <i className="fa-solid fa-thumbs-up fa-lg"></i> ({snippet?.likeCount})
         </div>
         {replies && replies?.comments?.length > 0 && (
           <button
@@ -61,7 +61,8 @@ const EachReply = (props) => {
           <div className="break-all text-xs">{snippet?.textDisplay}</div>
 
           <div>
-            <i class="fa-solid fa-thumbs-up fa-lg"></i> ({snippet?.likeCount})
+            <i className="fa-solid fa-thumbs-up fa-lg"></i> (
+            {snippet?.likeCount})
           </div>
         </div>
       </div>

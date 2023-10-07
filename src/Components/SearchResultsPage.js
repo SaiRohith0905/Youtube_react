@@ -6,9 +6,12 @@ import { SEARCH_RESULTS_URL } from "../Utils/Constant";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addHistory } from "../Utils/watchHistorySlice";
+import ResultVideoCardShimmer from "./Shimmers/ResultVideoCardShimmer";
 const SearchResultsPage = () => {
   const [results, setResults] = useState([]);
+  const [resultsLoading, setResultsLoading] = useState(false);
   const [data] = useSearchParams();
+  const resultShimmerArray = Array(10).fill("");
 
   const [nextPageToken, setNextPageToken] = useState("");
   let searchword;
@@ -19,6 +22,7 @@ const SearchResultsPage = () => {
   const dispatch = useDispatch();
 
   async function searchResults() {
+    setResultsLoading(true);
     let url =
       SEARCH_RESULTS_URL +
       searchword +
@@ -31,6 +35,7 @@ const SearchResultsPage = () => {
     console.log(searchdata);
     setNextPageToken(searchdata?.nextPageToken);
     setResults(results.concat(searchdata?.items));
+    setResultsLoading(false);
   }
   const handleScroll = () => {
     if (
@@ -71,10 +76,23 @@ const SearchResultsPage = () => {
             );
           })}
         </div>
+        {resultsLoading && (
+          <div>
+            {resultShimmerArray.map((eachitem, index) => {
+              return <ResultVideoCardShimmer key={index} />;
+            })}
+          </div>
+        )}
       </div>
     );
   } else {
-    return <div>Loading ......</div>;
+    return (
+      <div>
+        {resultShimmerArray.map((eachitem, index) => {
+          return <ResultVideoCardShimmer key={index} />;
+        })}
+      </div>
+    );
   }
 };
 

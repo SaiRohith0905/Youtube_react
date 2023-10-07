@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VIDEO_DETAILS_URL, YOUTUBE_KEY } from "../Utils/Constant";
 import VideoKebabMenu from "./VideoKebabMenu";
 import { formatViews } from "../Utils/Helper";
+import VideoCardShimmer from "./VideoCardShimmer";
 
 const VideoCard = (props) => {
   const [videoDetails, setVideoDetails] = useState();

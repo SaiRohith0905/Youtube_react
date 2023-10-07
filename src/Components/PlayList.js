@@ -31,7 +31,7 @@ const PlayList = () => {
           return (
             <Link to={"/playlist?list=" + eachPlayListItem?.id}>
               <div className=" hover:bg-gray-200 hover:rounded-md ">
-                <i class="fa-solid fa-headphones-simple pr-[4px] ml-2"></i>
+                <i className="fa-solid fa-headphones-simple pr-[4px] ml-2"></i>
 
                 <li className=" mt-1 mb-1 pt-1 pb-1 inline-block">
                   {eachPlayListItem?.snippet?.title}
